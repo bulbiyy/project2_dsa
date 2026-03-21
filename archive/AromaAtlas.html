@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aroma Atlas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0;0}
+
+        :root {
+            --blush: #fdf0f3;
+            --petal: #f7d6e0;
+            --rose: #e8a0b4;
+            --rose-dark: #c5687e;
+            --lavender: #ede8f8;
+            --lilac: #c4b5e8;
+            --lilac-dark: #8b6fc4;
+            --plum: #5c3d7a;
+            --mist: #f9f4fb;
+            --smoke: #a899b8;
+            --ink: #2d1f3d;
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --trans: 0.25s ease;
+        }
+
+        html {scroll-behavior: smooth;}
+
+        body{
+            font-family: var(--sans);
+            background: var(--blush);
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* flower background pattern */
+        body::before {
+            content: "";
+            position: fixed; inset: 0;
+            background-image:
+                radial-gradient(ellipse 70% 50% at 10% 20%, rgba(196,181,232,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 90% 80%, rgba(232,160,180,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 30% at 50% 50%, rgba(253,240,243,0) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+            }
+
+        header {
+            position: relative;
+            text-align: center;
+            padding: 3.5rem 2rem 3rem;
+            backround: linear-gradient(160deg, #fff5f8 0%, #f0eafb 100%);
+            border-bottom: 1px solid var(--petal);
+            overflow: hidden;
+        }
+
+        /* flower shapes */
+        header::before {
+            content: "";
+            position: absolute;
+            top: -40px; left: -40px;
+            width: 220px; height: 220px;
+            background: radial-gradient(circle, rgba(196,181,232,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -30px; right: -30px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(232,160,180,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-inner {position: relative; z-index: 1;}
+
+        .header-tag {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lilac-dark);
+            background: var(--lavender);
+            padding: 0.3rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.25rem;
+        }
+
+        header h1 {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 400;
+            color: var(--plum);
+            letter-spacing: 0.02em;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        header h1 em {
+            font-style: italic;
+            color: var(--rose-dark);
+        }
+
+        .header-sub {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--smoke);
+            letter-spacing: 0.05em;
+        }
+
+        .petals {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 5rem;
+        }
+
+        /* search */
+        .search-card {
+            background: #fff;
+            border: 1px solid var(--petal);
+            border-radius: 20px;
+            padding: 2.25rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 32px rgba(140, 90, 160, 0.07);
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--lilac-dark);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-label::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--lavender);
+        }
+
+        /* notes */
+        .notes-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .note-field {position: relative;}
+
+        .note-field label {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--smoke);
+            margin-bottom: 0.7rem;
+        }
+
+        .note-field input {
+            width: 100%;
+            background: var(--mist);
+            border: 1.5px solid var(--lavender);
+            border-radius: 10px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            padding: 0.6rem 0.9rem;
+            outline: none;
+            transition: border-color var(--trans), box-shadow var(--trans);
+        }
+
+        .note-field input::placeholder {color: #ccc0d8}
+
+        .note-field input:focus {
+            border-color: var(--lilac);
+            box-shadow: 0 0 0 3px rgba(196,181,232,0.2);
+        }
+
+        /* autocomplete */
+        .autocomplete-list {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1.5px solid var(--lavender);
+            border-radius: 10px;
+            z-index: 50;
+            max-height: 180px;
+            overflow-y: auto;
+            box-shadow: 0 8px 24px rgba(140, 90, 160, 0.1);
+        }
+
+        .autocomplete-list li {
+            list-style: none;
+            padding: 0.5rem 0.9rem;
+            font-size: 0.9rem;
+            color: var(--ink);
+            cursor: pointer;
+            transition: background var(--trans)
+        }
+
+        .autocomplete-list li:first-child {border-radius: 8px 8px 0 0;}
+        .autocomplete-list li:last-child {border-radius: 0 0 8px 8px;}
+
+        .autocomplete-list li:hover,
+        .autocomplete-list li:active {
+            background: var(--lavender);
+            color: var(--plum);
+        }
+
+        /* priority */
+        .priority-row {margin-bottom: 1.75rem;}
+
+        .priority-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .priority-button {
+            background: var(--mist);
+            border: 1.5px solid var(--lavender);
+            border-radius: 999px;
+            color: var(--smoke);
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 400;
+            padding: 0.35rem 1rem;
+            cursor: pointer;
+            transition: all var(--trans)
+        }
+
+        .priority-button:hover {
+            border-color: var(--lilac);
+            color: var(--plum);
+        }
+
+        .priority-button.selected {
+            background: var(--plum);
+            border-color: var(--plum);
+            color: #fff;
+        }
+
+        /* search button */
+        .search-button {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--petal) 0%, var(--rose-dark) 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity var(--trans), transform var(--trans);
+        }
+
+        .search-button:hover {opacity: 0.92; transform: translateY(-1px);}
+        .search-button:active {trasnform: translateY(0);}
+        .search-button:disabled {opacity: 0.5; cursor: not-allowed; transform: none;}
+
+        /* perfume card */
+        .perfume-card {
+            display: none;
+            background: #fff;
+            border: 1px solid var(--petal);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .perfume-card.visible {display: block;}
+
+        .perfume-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .perfume-item {
+            background: var(--mist);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        .perfume-item .ds-name {
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke);
+            margin-bottom: 0.3rem;
+        }
+
+        .perfume-item .ds-time {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .perfume-item .ds-time .unit {
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--smoke);
+            margin-left: 2px;
+        }
+
+        .perfume-item.fastest {background: var(--lavender);}
+        .perfume-item.fastest .ds-name {color: var(--plum);}
+
+        .fastest-tag {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lilac-dark);
+            margin-top: 0.25rem;
+        }
+
+        .perfume-track {
+            margin-top: 1.25rem;
+            height: 4px;
+            background: var(--lavender);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .perfume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--plum), var(--rose-dark));
+            border-radius: 999px;
+            transition: width 0.8s ease;
+        }
+
+        /* results */
+        .results-section {animation fadeUp 0.5s ease both;}
+
+        ds-toggle {
+            display: flex;
+            background: #fff;
+            border: 1px solid var(--petal);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 2rem;
+            gap: 4px;
+        }
+
+        .ds-toggle-button {
+            flex: 1;
+            padding: 0.6rem;
+            background: transparent;
+            border: none;
+            border-radius: 9px;
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--smoke);
+            cursor: pointer;
+            transition: all var(--trans);
+        }
+
+        .ds-toggle-button.active {
+            background: var(--plum);
+            color: #fff;
+        }
+
+        /* tiers */
+        .tier-block {margin-bottom: 2.5rem;}
+
+        .tier-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tier-tag {
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+        }
+
+        .tier1 .tier-tag {background: #f0faf0; color: #3a7a3a;}
+        .tier2 .tier-tag {background: var(--lavender); color: var(--plum);}
+        .tier3 .tier-tag {background: var(--petal); color: var(--rose-dark);}
+
+        .tier-label {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        .tier-count {
+            font-size: 0.7rem;
+            color: var(--smoke);
+            margin-left: auto;
+        }
+
+        /* cards */
+        .perfume-list {display: flex; flex-direction: column; gap: 0;}
+
+        .perfume-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 0.25rem;
+            border-bottom: 1px solid #f3eef8;
+            gap: 1rem;
+            animation: fadeUp 0.3s ease both;
+            transition: background var(--trans);
+            border-radius: 8px;
+        }
+
+        .perfume-card:hover {
+            background: #fdf8ff;
+            padding: 1rem 0.75rem;
+        }
+
+        .card-name {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 0.15rem;
+        }
+
+        .card-brand {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--smoke);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-notes {display: flex; flex-wrap: wrap; gap: 0.35rem;}
+
+        .note-pill {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+        }
+
+        .note-pill.top {background: #f0faf0; color: #3a7a3a;}
+        .note-pill.middle {background: var(--lavender); color: var(--plum);}
+        .note-pill.base {background: var(--petal); color: var(--rose-dark);}
+        .note-pill.priority {outline: 2px solid currentColor; outline-offset: 1px;}
+
+        .card-num {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--lilac);
+            min-width: 1.5rem;
+            text-align: right;
+            padding-top: 0.15rem;
+        }
+
+        .show-more-button {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.65rem;
+            background: transparent;
+            border: 1.5px solid var(--lavender);
+            border-radius: 10px;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--lilac-dark);
+            cursor: pointer;
+            transition: all var(--trans);
+        }
+
+        .show-more-button:hover {
+            background: var(--lavender);
+            color: var(--plum)
+        }
+
+        .empty-tier {
+            font-size: 0.9rem;
+            color: var(--smoke)
+            padding: 1rem 0;
+            font-style: italic;
+        }
+
+        /* error */
+        .error-message {
+            display: none;
+            background: #fff0f3;
+            border: 1px solid #f5c0cc;
+            border-radius: 10px;
+            padding: 0.9rem 1.25rem;
+            font-size: 0.88rem;
+            color: var(--rose-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .error-message.visible {display: block;}
+
+        /* loading */
+        .loading-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            nackground: rgba(253, 240, 243, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.visible {display: flex;}
+
+        .loading-box {
+            background: #fff;
+            border: 1px solid var(--petal);
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(140, 90, 160, 0.12);
+        }
+
+        loading-flower {
+            font-size: 2rem;
+            animation: spin 2s linear infinite;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .loading-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke);
+        }
+
+        /* animations */
+        @keyframes fadeUp {
+            from {opacity: 0; transform: translateY(12px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes spin {
+            from {transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-overlay" id="loadingOverlaw">
+        <div class="loading-box">
+            <span class="loading-flower">✿</span>
+            <div class="loading-label">Searching the atlas...</div>
+        </div>
+    </div>
+
+    <header>
+        <!-- petals -->
+
+    </header>
+
+</body>
+</html>
