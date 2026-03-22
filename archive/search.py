@@ -1,4 +1,5 @@
 import pandas as pd
+from hashmap import HashMap
 
 # -------- Search in clean database -----------
 
@@ -44,7 +45,44 @@ def merge_data(search_words):
         how="inner"
     )
 
+    result = result[["Name", "Gender", "Description", "Top", "Middle", "Base", "url"]]
     return result
 
 # ---------- Check final data base -----------------
-print(merge_data(["aldehydes", "vanilla"]))
+#print(merge_data(["aldehydessss"]))
+
+
+# ---------- Count for hashmap ----------
+def count_matches(row, search_words):
+    count = 0
+    for col in ["Top", "Middle", "Base"]:
+        if isinstance(row[col], str):
+            for word in search_words:
+                if word in row[col].lower():
+                    count += 1
+    return count
+
+# -------- Build hashmap -----------
+def build_hashmap(search_words):
+    df = merge_data(search_words)
+    hm = HashMap()
+
+    for _, row in df.iterrows():
+        entry = row.to_dict()
+        entry["match_count"] = count_matches(row, search_words)
+        key = row["Name"]
+        hm.insert(key, entry)
+
+    return hm
+
+# -------- Final function for hashmap -----------
+def get_sorted_results_for_hashmap(search_words):
+    hm = build_hashmap(search_words)
+    return hm.get_sorted_entries()
+
+# ------- Check hashmap ---------
+if __name__ == "__main__":
+    results = get_sorted_results_for_hashmap(["vanilla", "blood orange"])
+
+    for perfume in results:
+        print(f"{perfume['Name']} | matches: {perfume['match_count']}")

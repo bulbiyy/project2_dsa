@@ -52,6 +52,20 @@ class HashMap:
             return self._buckets[index][1]
         return []
 
+    # entries
+    def get_all_entries(self) -> list:
+        all_entries = []
+        for bucket in self._buckets:
+            if bucket is not None:
+                key, entries = bucket
+                all_entries.extend(entries)
+        return all_entries
+
+    # sort entries
+    def get_sorted_entries(self, sort_key="match_count", reverse=True) -> list:
+        all_entries = self.get_all_entries()
+        return sorted(all_entries, key=lambda x: x.get(sort_key, 0), reverse=reverse)
+
     # misc
     def _resize(self):
         old_buckets = self._buckets
