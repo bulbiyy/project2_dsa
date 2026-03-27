@@ -1,5 +1,5 @@
 import pandas as pd
-from archive.hashmap import HashMap
+from hashmap import HashMap
 
 # -------- Search in clean database -----------
 
