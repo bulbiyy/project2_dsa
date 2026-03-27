@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aroma Atlas</title>
+    <title>AromaAtlas</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <style>
-        *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0;0}
+        *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0;}
 
         :root {
             --blush: #fdf0f3;
@@ -51,7 +51,7 @@
             position: relative;
             text-align: center;
             padding: 3.5rem 2rem 3rem;
-            backround: linear-gradient(160deg, #fff5f8 0%, #f0eafb 100%);
+            background: linear-gradient(160deg, #fff5f8 0%, #f0eafb 100%);
             border-bottom: 1px solid var(--petal);
             overflow: hidden;
         }
@@ -282,11 +282,11 @@
         }
 
         .search-button:hover {opacity: 0.92; transform: translateY(-1px);}
-        .search-button:active {trasnform: translateY(0);}
+        .search-button:active {transform: translateY(0);}
         .search-button:disabled {opacity: 0.5; cursor: not-allowed; transform: none;}
 
-        /* perfume card */
-        .perfume-card {
+        /* performance card */
+        .performance-card {
             display: none;
             background: #fff;
             border: 1px solid var(--petal);
@@ -296,22 +296,22 @@
             animation: fadeUp 0.4s ease both;
         }
 
-        .perfume-card.visible {display: block;}
+        .performance-card.visible {display: block;}
 
-        .perfume-grid {
+        .performance-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.25rem;
             margin-top: 1rem;
         }
 
-        .perfume-item {
+        .performance-item {
             background: var(--mist);
             border-radius: 12px;
             padding: 1rem 1.25rem;
         }
 
-        .perfume-item .ds-name {
+        .performance-item .ds-name {
             font-size: 0.62rem;
             font-weight: 500;
             letter-spacing: 0.15em;
@@ -320,7 +320,7 @@
             margin-bottom: 0.3rem;
         }
 
-        .perfume-item .ds-time {
+        .performance-item .ds-time {
             font-family: var(--serif);
             font-size: 1.8rem;
             font-weight: 400;
@@ -328,15 +328,15 @@
             line-height: 1;
         }
 
-        .perfume-item .ds-time .unit {
+        .performance-item .ds-time .unit {
             font-family: var(--sans);
             font-size: 0.8rem;
             color: var(--smoke);
             margin-left: 2px;
         }
 
-        .perfume-item.fastest {background: var(--lavender);}
-        .perfume-item.fastest .ds-name {color: var(--plum);}
+        .performance-item.fastest {background: var(--lavender);}
+        .performance-item.fastest .ds-name {color: var(--plum);}
 
         .fastest-tag {
             font-size: 0.6rem;
@@ -347,7 +347,7 @@
             margin-top: 0.25rem;
         }
 
-        .perfume-track {
+        .performance-track {
             margin-top: 1.25rem;
             height: 4px;
             background: var(--lavender);
@@ -355,7 +355,7 @@
             overflow: hidden;
         }
 
-        .perfume-fill {
+        .performance-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--plum), var(--rose-dark));
             border-radius: 999px;
@@ -363,9 +363,9 @@
         }
 
         /* results */
-        .results-section {animation fadeUp 0.5s ease both;}
+        .results-section {animation: fadeUp 0.5s ease both;}
 
-        ds-toggle {
+        .ds-toggle {
             display: flex;
             background: #fff;
             border: 1px solid var(--petal);
@@ -432,7 +432,7 @@
             margin-left: auto;
         }
 
-        /* cards */
+        /* perfume cards */
         .perfume-list {display: flex; flex-direction: column; gap: 0;}
 
         .perfume-card {
@@ -520,7 +520,7 @@
 
         .empty-tier {
             font-size: 0.9rem;
-            color: var(--smoke)
+            color: var(--smoke);
             padding: 1rem 0;
             font-style: italic;
         }
@@ -543,7 +543,7 @@
         .loading-overlay {
             display: none;
             position: fixed; inset: 0;
-            nackground: rgba(253, 240, 243, 0.75);
+            background: rgba(253, 240, 243, 0.75);
             backdrop-filter: blur(4px);
             z-index: 200;
             align-items: center;
@@ -561,7 +561,7 @@
             box-shadow: 0 8px 40px rgba(140, 90, 160, 0.12);
         }
 
-        loading-flower {
+        .loading-flower {
             font-size: 2rem;
             animation: spin 2s linear infinite;
             display: block;
@@ -590,7 +590,7 @@
 </head>
 <body>
 
-    <div class="loading-overlay" id="loadingOverlaw">
+    <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-box">
             <span class="loading-flower">✿</span>
             <div class="loading-label">Searching the atlas...</div>
@@ -599,8 +599,492 @@
 
     <header>
         <!-- petals -->
+        <svg class="petals" viewBox="0 0 800 260">
+            <ellipse cx="90"  cy="60"  rx="38" ry="18" fill="rgba(232,160,180,0.18)" transform="rotate(-30 90 60)"/>
+            <ellipse cx="130" cy="40"  rx="28" ry="12" fill="rgba(196,181,232,0.2)"  transform="rotate(15 130 40)"/>
+            <ellipse cx="60"  cy="100" rx="22" ry="10" fill="rgba(232,160,180,0.14)" transform="rotate(50 60 100)"/>
+            <ellipse cx="710" cy="55"  rx="36" ry="16" fill="rgba(196,181,232,0.18)" transform="rotate(20 710 55)"/>
+            <ellipse cx="740" cy="90"  rx="26" ry="11" fill="rgba(232,160,180,0.2)"  transform="rotate(-45 740 90)"/>
+            <ellipse cx="680" cy="35"  rx="20" ry="9"  fill="rgba(196,181,232,0.14)" transform="rotate(60 680 35)"/>
+            <ellipse cx="400" cy="20"  rx="16" ry="7"  fill="rgba(232,160,180,0.12)" transform="rotate(10 400 20)"/>
+            <ellipse cx="350" cy="230" rx="30" ry="13" fill="rgba(196,181,232,0.12)" transform="rotate(-20 350 230)"/>
+            <ellipse cx="450" cy="245" rx="24" ry="10" fill="rgba(232,160,180,0.1)"  transform="rotate(35 450 245)"/>
+        </svg>
 
+        <div class="header-inner">
+            <div class="header-tag">Fragrance Discovery</div>
+            <h1>Aroma<em>Atlas</em></h1>
+            <p class="header-sub">Find your perfect scent ✿ Hash Map &amp; Trie Comparison</p>
+        </div>
     </header>
+
+    <main>
+        <div class="search-card" id="searchPanel">
+            <div class="section-label">Scent Notes</div>
+
+            <div class="notes-row" id="notesRow">
+                <div class="note-field" data-index="0">
+                    <label>First note</label>
+                    <input type="text" class="note-input" placeholder="e.g. rose" autocomplete="off" />
+                    <ul class="autocomplete-list" style="display:none;"></ul>
+                </div>
+                <div class="note-field" data-index="1">
+                    <label>Second note</label>
+                    <input type="text" class="note-input" placeholder="e.g. vanilla" autocomplete="off" />
+                    <ul class="autocomplete-list" style="display:none;"></ul>
+                </div>
+                <div class="note-field" data-index="2">
+                    <label>Third note <span style="font-weight: 300; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+                    <input type="text" class="note-input" placeholder="e.g. sandalwood" autocomplete="off" />
+                    <ul class="autocomplete-list" style="display:none;"></ul>
+                </div>
+            </div>
+
+            <div class="priority-row">
+                <div class="section-label">Priority Note</div>
+                <div class="priority-options" id="priorityOptions">
+                    <button class="priority-button selected" data-note="">None</button>
+                </div>
+            </div>
+
+            <button class="search-button" id="searchButton" onclick="doSearch()">
+                Search the Atlas
+            </button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="performance-card" id="performanceBar">
+            <div class="section-label">Query Performance</div>
+            <div class="performance-grid">
+                <div class="performance-item" id="hashPerformance">
+                    <div class="ds-name">Hash Map</div>
+                    <div class="ds-time"><span id="hashTime">-</span><span class="unit">ms</span></div>
+                </div>
+                <div class ="performance-item" id="triePerformance">
+                    <div class="ds-name">Trie</div>
+                    <div class="ds-time"><span id="trieTime">-</span><span class="unit">ms</span></div>
+                </div>
+            </div>
+            <div class="performance-track">
+                <div class="performance-fill" id="performanceBarFill" style="width:50%"></div>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display:none;">
+            <div class="ds-toggle">
+                <button class="ds-toggle-button active" onclick="switchDS('hashmap')">Hash Map</button>
+                <button class="ds-toggle-button" onclick="switchDS('trie')">Trie</button>
+            </div>
+            <div id="tierContainer"></div>
+        </div>
+
+    </main>
+
+    <script>
+        let lastResponse = null;
+        let activeDS = 'hashmap';
+        let acTimers = {};
+        let acSelected = [-1, -1, -1];
+
+        const tier_info = {
+            tier1: {label: "Perfect Match"},
+            tier2: {label: "Close Match"},
+            tier3: {label: "Priority Match"},
+        };
+
+        const pageSize = 20;
+        let tierPages = {tier1: 1, tier2: 1, tier3:1};
+
+        function updatePriorityButtons() {
+            const notes = getNotes().filter(Boolean);
+            const options = document.getElementById('priorityOptions');
+            const current = getSelectedPriority();
+            options.innerHTML = '';
+            options.appendChild(makeButton('None', '', current === ''));
+            for (let i = 0; i < notes.length; i++) {
+                const note = notes[i];
+                if (note) {
+                    const isSelected = current === note;
+                    const button = makeButton(note, note, isSelected);
+                    options.appendChild(button);
+                }
+            }
+        }
+
+        function makeButton(label, value, selected) {
+            const button = document.createElement('button');
+
+            if (selected) {
+                button.className = 'priority-button selected';
+            }
+            else {
+                button.className = 'priority-button';
+            }
+            button.dataset.note = value;
+
+            if (label) {
+                button.textContent = label;
+            }
+            else {
+                button.textContent = 'None';
+            }
+
+            button.onclick = function () {
+                const allButtons = document.querySelectorAll('.priority-button');
+                for (let i = 0; i < allButtons.length; i++) {
+                    allButtons[i].classList.remove('selected');
+                }
+                button.classList.add('selected');
+            };
+            return button;
+        }
+
+        function getSelectedPriority() {
+            const selectedButton = document.querySelector('.priority-button.selected');
+            if (selectedButton) {
+                return selectedButton.dataset.note;
+            }
+            else {
+                return '';
+            }
+        }
+
+        function getNotes() {
+            const inputs = document.querySelectorAll('.note-input');
+            const notes = [];
+            for (let i = 0; i < inputs.length; i++) {
+                notes.push(inputs[i].value.trim().toLowerCase());
+            }
+            return notes;
+        }
+
+        const noteFields = document.querySelectorAll('.note-field');
+        for (let i = 0; i < noteFields.length; i++) {
+            const field = noteFields[i];
+            const input = field.querySelector('input');
+            const list = field.querySelector('.autocomplete-list');
+
+            input.addEventListener('input', function() {
+                clearTimeout(acTimers[i]);
+                acTimers[i] = setTimeout(function() {
+                    fetchAC(input, list, i);
+                }, 150);
+                updatePriorityButtons();
+            });
+
+            input.addEventListener('keydown', function(keyPress) {
+                const items = list.querySelectorAll('li');
+
+                if (keyPress.key === 'ArrowDown') {
+                    acSelected[i] = Math.min(acSelected[i] + 1, items.length - 1);
+                    highlight(items, acSelected[i]);
+                    keyPress.preventDefault()
+                }
+                if (keyPress.key === 'ArrowUp') {
+                    acSelected[i] = Math.max(acSelected[i] - 1, 0);
+                    highlight(items, acSelected[i]);
+                    keyPress.preventDefault()
+                }
+                if (keyPress.key === 'Enter') {
+                    if (acSelected[i] >= 0 && items[acSelected[i]]) {
+                        input.value = items[acSelected[i]].textContent;
+                        closeList(list, i);
+                        updatePriorityButtons();
+                    }
+                    else {
+                        doSearch();
+                    }
+                }
+                if (keyPress.key === 'Escape') {
+                    closeList(list, i);
+                }
+            });
+            document.addEventListener('click', function(keyPress) {
+                if (!field.contains(keyPress.target)) {
+                    closeList(list, i);
+                }
+            });
+        }
+
+        async function fetchAC(input, list, i) {
+            const query = input.value.trim();
+            if (query.length < 1) {
+                closeList(list, i);
+                return;
+            }
+            try {
+                const response = await fetch('/autocomplete?q=' + encodeURIComponent(query));
+                const data = await response.json()
+                list.innerHTML = '';
+                acSelected[i] = -1;
+
+                if (!data.length) {
+                    closeList(list, i);
+                    return;
+                }
+                for (let j = 0; j < data.length; j++) {
+                    const note = data[j];
+                    const li = document.createElement('li');
+                    li.textContent = note;
+                    li.onmousedown = function(keyPress) {
+                        keyPress.preventDefault();
+                        input.value = note;
+                        closeList(list, i);
+                        updatePriorityButtons();
+                    };
+                    list.appendChild(li);
+                }
+                list.style.display = 'block';
+            } catch(error) {
+                // silent fail
+            }
+        }
+
+        function highlight(items, index) {
+            for (let i = 0; i < items.length; i++) {
+                if (i === index) {
+                    items[i].classList.add('active');
+                } else {
+                    items[i].classList.remove('active');
+                }
+            }
+        }
+
+        function closeList(list, i) {
+            list.style.display = 'none';
+            acSelected[i] = -1;
+        }
+
+        async function doSearch() {
+            const allNotes = getNotes();
+            const notes = [];
+            for (let i = 0; i < allNotes.length; i++) {
+                if (allNotes[i]) {
+                    notes.push(allNotes[i]);
+                }
+            }
+            const priority = getSelectedPriority();
+
+            if (!notes.length) {
+                showError('Please enter at least one scent note.')
+                return;
+            }
+
+            showError('');
+            setLoading(true);
+            tierPages = {tier1: 1, tier2: 1, tier3:1};
+
+            try {
+                const result = await fetch('/search', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({notes: notes, priority: priority}),
+                });
+                const data = await result.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+                lastResponse = data;
+                activeDS = 'hashmap';
+
+                showPerformance(data);
+                showResults(data, activeDS);
+                updateToggle();
+            } catch(error) {
+                showError('Make sure app.py is running.')
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function showPerformance(data) {
+            const hashTime = data.hashmap.time_ms;
+            const trieTime = data.trie.time_ms;
+
+            document.getElementById('hashTime').textContent = hashTime.toFixed(4);
+            document.getElementById('trieTime').textContent = trieTime.toFixed(4);
+
+            const fastest = data.fastest;
+
+            if (fastest === 'hashmap') {
+                document.getElementById('hashPerformance').classList.add('fastest');
+                document.getElementById('triePerformance').classList.remove('fastest');
+            } else {
+                document.getElementById('triePerformance').classList.add('fastest');
+                document.getElementById('hashPerformance').classList.remove('fastest');
+            }
+            const oldTags = document.querySelectorAll('.fastest-tag');
+            for (let i = 0; i < oldTags.length; i++) {
+                oldTags[i].remove();
+            }
+            let fastestElement;
+            if (fastest === 'hashmap') {
+                fastestElement = document.getElementById('hashPerformance');
+            } else {
+                fastestElement = document.getElementById('triePerformance');
+            }
+            const tag = document.createElement('div');
+            tag.className = 'fastest-tag';
+            tag.textContent = '▲ Faster';
+            fastestElement.appendChild(tag);
+
+            const total = hashTime + trieTime;
+            let percentage;
+            if (total > 0) {
+                percentage = (hashTime / total) * 100;
+            } else {
+                percentage = 50;
+            }
+            document.getElementById('performanceBarFill').style.width = percentage + '%';
+            document.getElementById('performanceBar').classList.add('visible');
+        }
+
+        function showResults(data, ds) {
+            const results = data[ds].results;
+            const container = document.getElementById('tierContainer');
+            container.innerHTML = '';
+            const priority = data.priority;
+
+            const tiers = ['tier1', 'tier2', 'tier3'];
+
+            for (let i = 0; i < tiers.length; i++) {
+                const tier = tiers[i];
+                const items = results[tier];
+                const info = tier_info[tier];
+
+                if ((tier === 'tier2' || tier === 'tier3')  && !priority) {
+                    continue;
+                }
+
+                let tagLabel;
+                if (tier === 'tier1') {
+                    tagLabel = 'Tier 1';
+                } else if (tier === 'tier2') {
+                    tagLabel = 'Tier 2';
+                } else {
+                    tagLabel = 'Tier 3';
+                }
+
+                let countLabel;
+                if (items.length === 1) {
+                    countLabel = '1 result';
+                } else {
+                    countLabel = items.length + ' results';
+                }
+
+                const block = document.createElement('div');
+                block.className = 'tier-block ' + tier;
+                block.innerHTML =
+                    '<div class="tier-header">' +
+                        '<span class="tier-tag">' + tagLabel + '</span>' +
+                        '<div class="tier-label">' + info.label + '</div>' +
+                        '<div class="tier-count">' + countLabel + '</div>' +
+                        '</div>' +
+                        '<div class="perfume-list" id="' + tier + '-list"></div>';
+
+                container.appendChild(block);
+
+                const tierListContainer = block.querySelector('#' + tier + '-list');
+                renderPage(tierListContainer, items, tier, priority);
+            }
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function renderPage(tierListContainer, items, tier, priority) {
+            const slice = items.slice(0, tierPages[tier] * pageSize);
+            tierListContainer.innerHTML = '';
+
+            if (!slice.length) {
+                tierListContainer.innerHTML = '<div class ="empty-tier">No fragrances found for this tier</div>';
+                return;
+            }
+            for (let i = 0; i < slice.length; i++) {
+                const item = slice[i];
+                const card = document.createElement('div');
+                card.className = 'perfume-card';
+                card.style.animationDelay = (Math.min(i, 10) * 0.03) + 's';
+
+                let pills = '';
+                for (let j = 0; j < item.matched_notes.length; j++) {
+                    const mn = item.matched_notes[j];
+                    let pillClass = 'note-pill ' + mn.layer;
+                    if (mn.note === priority) {
+                        pillClass = pillClass + ' priority';
+                    }
+                    pills = pills + '<span class="' + pillClass + '">' + mn.note + ' · ' + mn.layer + '</span>';
+                }
+
+                card.innerHTML =
+                    '<div class="card-main">' +
+                        '<div class="card-name">' + item.name + '</div>' +
+                        '<div class="card-brand">' + item.brand + '</div>' +
+                        '<div class="card-notes">' + pills + '</div>' +
+                    '</div>' +
+                    '<div class="card-num">' + (i + 1) + '</div>';
+
+                tierListContainer.appendChild(card);
+            }
+            if (items.length > slice.length) {
+                const remaining = items.length - slice.length;
+                const button = document.createElement('button');
+                button.className = 'show-more-button';
+                button.textContent = 'Show more (' + remaining + ' remaining)';
+                button.onclick = function () {
+                    tierPages[tier]++;
+                    tierListContainer.innerHTML = '';
+                    renderPage(tierListContainer, items, tier, priority);
+                };
+                tierListContainer.appendChild(button);
+            }
+        }
+
+        function switchDS(ds) {
+            if (!lastResponse) {
+                return;
+            }
+            activeDS = ds;
+            tierPages = {tier1: 1, tier2: 1, tier3: 1};
+            updateToggle();
+            showResults(lastResponse, ds);
+        }
+
+        function updateToggle() {
+            const toggleButtons = document.querySelectorAll('.ds-toggle-button');
+            for (let i = 0; i < toggleButtons.length; i++) {
+                if (i === 0 && activeDS === 'hashmap') {
+                    toggleButtons[i].classList.add('active');
+                } else if (i === 1 && activeDS === 'trie') {
+                    toggleButtons[i].classList.add('active');
+                } else {
+                    toggleButtons[i].classList.remove('active');
+                }
+            }
+        }
+
+        function setLoading(on) {
+            if (on) {
+                document.getElementById('loadingOverlay').classList.add('visible');
+                document.getElementById('searchButton').disabled = true;
+            } else {
+                document.getElementById('loadingOverlay').classList.remove('visible');
+                document.getElementById('searchButton').disabled = false;
+            }
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorMessage');
+            errorBox.textContent = message;
+            if (message) {
+                errorBox.classList.add('visible');
+            } else {
+                errorBox.classList.remove('visible');
+            }
+        }
+
+    </script>
 
 </body>
 </html>
