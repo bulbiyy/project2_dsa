@@ -51,6 +51,14 @@ def build_tiers(results, notes, priority):
                             "layer": layer.lower()
                         })
 
+        seen_notes = set()
+        deduplicated = []
+        for m in matched:
+            if m["note"] not in seen_notes:
+                seen_notes.add(m["note"])
+                deduplicated.append(m)
+        matched = deduplicated
+        
         item_out = {
             "name": item["Name"],
             "brand": item.get("Gender", ""),
