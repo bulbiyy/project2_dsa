@@ -1,5 +1,8 @@
 # AromaAtlas Project
 
+## What is AromaAtlas?
+In the perfume industry, which includes thousands of brands and fragrance collections, customers often lack familiarity with the wide range of options available on the market. At the same time, most people have specific scent preferences that they would like to wear for everyday use or special occasions. AromaAtlas addresses this challenge by helping individuals discover fragrances that match their preferred scent notes, making it easier to find a perfume that truly fits their personal taste.
+
 ## How to open the website
 
 ### 1. Make sure you have the requirements
