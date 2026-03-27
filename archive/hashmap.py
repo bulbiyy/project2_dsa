@@ -62,9 +62,9 @@ class HashMap:
         return all_entries
 
     # sort entries
-    def get_sorted_entries(self, sort_key="match_count", reverse=True) -> list:
+    def get_sorted_entries(self) -> list:
         all_entries = self.get_all_entries()
-        return sorted(all_entries, key=lambda x: x.get(sort_key, 0), reverse=reverse)
+        return sorted(all_entries, key=lambda x: (-x.get("match_count", 0), x.get("Name", "").lower()))
 
     # misc
     def _resize(self):
