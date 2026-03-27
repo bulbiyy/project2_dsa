@@ -17,8 +17,6 @@ def search_data(search_words):
         )
     ).any(axis=1)
     return df[mask]
-
-
 # ----------- Check ----------------
 # matches = search_data(["blood orange", "vanilla"])
 # print(matches)
@@ -47,7 +45,6 @@ def merge_data(search_words):
 
     result = result[["Name", "Gender", "Description", "Top", "Middle", "Base", "url"]]
     return result
-
 # ---------- Check final data base -----------------
 #print(merge_data(["aldehydessss"]))
 
@@ -81,8 +78,8 @@ def get_sorted_results_for_hashmap(search_words):
     return hm.get_sorted_entries()
 
 # ------- Check hashmap ---------
-if __name__ == "__main__":
-    results = get_sorted_results_for_hashmap(["vanilla", "blood orange"])
-
-    for perfume in results:
-        print(f"{perfume['Name']} | matches: {perfume['match_count']}")
+# if __name__ == "__main__":
+#     results = get_sorted_results_for_hashmap(["vanilla", "blood orange"])
+#
+#     for perfume in results:
+#         print(f"{perfume['Name']} | matches: {perfume['match_count']}")
