@@ -57,15 +57,17 @@ def build_tiers(results, notes, priority):
             "matched_notes": matched
         }
 
-        match_count = item.get("match_count", 0)
+        unique_matched_notes = set(m["note"] for m in matched)
 
-        if match_count == len(notes):
+        if unique_matched_notes == set(notes):
             tier1.append(item_out)
-        elif priority and any(m["note"] == priority for m in matched):
-            tier3.append(item_out)
+        elif priority and priority in unique_matched_notes:
+            if len(unique_matched_notes) >= 2:
+                tier2.append(item_out)
+            else:
+                tier3.append(item_out)
         else:
-            tier2.append(item_out)
-
+            pass
     return {
         "tier1": tier1,
         "tier2": tier2,
