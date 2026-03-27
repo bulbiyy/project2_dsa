@@ -1,5 +1,3 @@
-# project2_dsa
-
 # AromaAtlas Project
 
 ## How 'search.py' works
