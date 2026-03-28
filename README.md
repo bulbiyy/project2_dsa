@@ -31,7 +31,7 @@ cd archive
 ```
 <sup> *Note that you will need to cd into the project folder in order to cd into archive* </sup>
 
-Start the backend:
+Start the server:
 ```bash
 python3 app.py
 ```
