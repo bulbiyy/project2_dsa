@@ -23,7 +23,7 @@ python --version
 pip install flask pandas
 ```
 
-### 2. Run the backend
+### 2. Run the server
 
 Navigate to archive folder:
 ```bash
