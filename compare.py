@@ -8,7 +8,6 @@ def compare(search_words):
     print(f"Search words: {search_words}")
     print(f"{'='*55}")
 
-    #HashMap
     t0 = time.perf_counter()
     hm_results = get_sorted_results_for_hashmap(search_words)
     hm_time = time.perf_counter() - t0
