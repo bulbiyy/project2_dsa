@@ -28,7 +28,7 @@ def compare(search_words):
     for p in trie_results[:5]:
         print(f"    {p['Name']:40s} matches: {p['match_count']}")
 
-    #Summary
+
     print(f"\n{'─'*55}")
     print(f"HashMap time : {hm_time*1000:.2f} ms")
     print(f"Trie time    : {trie_time*1000:.2f} ms")
